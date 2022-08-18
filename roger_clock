@@ -1,0 +1,31 @@
+#!/bin/bash
+
+TORSOX=torsocks
+
+CURL=/usr/local/opt/curl-openssl/bin/curl
+
+URL=explorer.theholyroger.com/api/getblockcount
+
+DATE=date
+
+FIGLET=figlet
+
+SOUND="printf \\a"
+
+TIME=30
+
+var='529840'
+old_var='529840'
+
+until false
+do
+  var=$($TORSOX $CURL $URL)
+  $DATE
+  echo $var | $FIGLET
+  if test "$var" != "$old_var"
+  then
+    $SOUND
+  fi
+  old_var=$var
+  sleep $TIME
+done
